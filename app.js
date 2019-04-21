@@ -9,7 +9,7 @@ app.use(morgan('common'));
 app.use(cors());
 
 app.get('/apps', (req, res) => {
-    const { sort, genre = ' '} = req.query;
+    const { sort, genre=''} = req.query;
 
     if(sort){
         if(!['rating', 'app'].includes(sort)){
@@ -33,9 +33,9 @@ app.get('/apps', (req, res) => {
                 playApp
                     .Genres
                     .includes(genre));
+    
     res
         .json(results);
-
     //sort results
     if(sort){
         results.sort((a, b) => {
@@ -44,6 +44,4 @@ app.get('/apps', (req, res) => {
     }
 });
 
-app.listen(8000, () => {
-    console.log('Server started on Port 8000');
-});
+module.exports = app;
